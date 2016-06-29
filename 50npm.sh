@@ -8,7 +8,7 @@ function error_exit
 
 #redirect all output to cfn-init to capture it by log.io
 exec >>/var/log/cfn-init.log  2>&1
-echo "------------------------------ — Installing NPM Modules! — ---------------------------------------"
+echo "------------------------------ — Setting up NPM directory! — ---------------------------------------"
 
 #avoid long NPM fetch hangups
 npm config set fetch-retry-maxtimeout 15000
