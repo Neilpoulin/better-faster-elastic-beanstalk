@@ -21,6 +21,19 @@ echo $OUT
 #UNCOMMENT to update npm, otherwise will be updated on instance init or rebuild
 #rm -f /opt/elasticbeanstalk/node-install/npm_updated
 
+echo "checking yarn"
+if [ ! -L /usr/bin/yarn ]; then
+        # install yarn
+        echo "installing yarn"
+        sudo wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.repo
+        curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
+        yes | sudo yum install yarn
+else
+        echo "yarn already found, not installing"
+fi
+
+echo yarn version = `yarn --version`
+
 #download & make install desired nginx version
 echo "checking nginx..."
 
@@ -68,4 +81,3 @@ echo "YAY! Updated global NPM version to `npm -v`"
 else
   echo "Skipping NPM -g version update. To update, please uncomment 40install_node.sh:12"
 fi
-

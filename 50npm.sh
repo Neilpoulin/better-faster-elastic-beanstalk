@@ -22,6 +22,8 @@ if [ -d /tmp/deployment/application ]; then
 fi
 
 echo "------------------------------ — Installing/updating NPM modules, it might take a while, go take a leak or have a healthy snack... — -----------------------------------"
+cd /tmp/deployment/application
+/opt/elasticbeanstalk/node-install/node-v$NODE_VER-linux-$ARCH/bin/npm install node-sass
 OUT=$([ -d "/tmp/deployment/application" ] && cd /tmp/deployment/application && /opt/elasticbeanstalk/node-install/node-v$NODE_VER-linux-$ARCH/bin/npm install --production) || error_exit "Failed to run npm install.  $OUT" $?
 echo $OUT
 
