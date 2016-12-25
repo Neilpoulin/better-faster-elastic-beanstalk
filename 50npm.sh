@@ -14,12 +14,23 @@ echo "------------------------------ — Setting up NPM directory! — ---------
 npm config set fetch-retry-maxtimeout 15000
 
 #install not-installed yet app node_modules
+echo "linking NPM modules to /var/node_modules"
 if [ ! -d "/var/node_modules" ]; then
   mkdir /var/node_modules ;
 fi
 if [ -d /tmp/deployment/application ]; then
   ln -s /var/node_modules /tmp/deployment/application/
 fi
+
+if [ ! -L /usr/bin/yarn ]; then
+        # install yarn
+        echo "installing yarn"
+        sudo /opt/elasticbeanstalk/node-install/node-v$NODE_VER-linux-$ARCH/bin/npm install yarn -g
+else
+        echo "yarn already found, not installing"
+fi
+
+echo yarn version = `yarn --version`
 
 # echo "------------------------------ — Installing/updating NPM modules, it might take a while, go take a leak or have a healthy snack... — -----------------------------------"
 # cd /tmp/deployment/application
