@@ -1,7 +1,9 @@
 #!/bin/bash
+echo "running 50npm.sh"
 . /opt/elasticbeanstalk/env.vars
 function error_exit
 {
+  echo "exiting with error"
   eventHelper.py --msg "$1" --severity ERROR
   exit $2
 }
@@ -25,7 +27,9 @@ fi
 if [ ! -L /usr/bin/yarn ]; then
         # install yarn
         echo "installing yarn"
-        sudo /opt/elasticbeanstalk/node-install/node-v$NODE_VER-linux-$ARCH/bin/npm install yarn -g
+        sudo wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.repo
+        curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
+        sudo yum -y install yarn
 else
         echo "yarn already found, not installing"
 fi
