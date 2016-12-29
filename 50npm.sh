@@ -41,10 +41,9 @@ echo yarn version = `yarn --version`
 # /opt/elasticbeanstalk/node-install/node-v$NODE_VER-linux-$ARCH/bin/npm install node-sass
 # OUT=$([ -d "/tmp/deployment/application" ] && cd /tmp/deployment/application && /opt/elasticbeanstalk/node-install/node-v$NODE_VER-linux-$ARCH/bin/npm install --production) || error_exit "Failed to run npm install.  $OUT" $?
 # echo $OUT
-
-echo "------------------------------ — Installing/updating NPM modules with YARN — -----------------------------------"
+echo "------------------------------ — Installing/updating NPM modules with YARN (And making sure node-sass is installed with NPM) — -----------------------------------"
 cd /tmp/deployment/application
-OUT=$([ -d "/tmp/deployment/application" ] && cd /tmp/deployment/application && /usr/bin/yarn install --production) || error_exit "Failed to run yarn install.  $OUT" $?
+OUT=$([ -d "/tmp/deployment/application" ] && cd /tmp/deployment/application && /usr/bin/yarn install --production)  && npm install node-sass|| error_exit "Failed to run yarn install.  $OUT" $?
 echo $OUT
 
 
