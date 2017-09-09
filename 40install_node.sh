@@ -27,7 +27,7 @@ if [ ! -L /usr/bin/yarn ]; then
         echo "installing yarn"
         sudo wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.repo
         curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
-        yes | sudo yum install yarn
+        sudo yum -y install yarn
 else
         echo "yarn already found, not installing"
 fi
